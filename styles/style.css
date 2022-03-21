@@ -1,9 +1,11 @@
+/* フォントの設定 */
 html {
 	
 	font-size: 10px; /* px means "pxels": the base font size is now 10 pixels high */
 	font-family: 'M PULS 1 Code', sans-serif;
 }
 
+/* メインタイトルの設定 */
 h1 {
 	font-size: 60px;
 	text-align: center;
@@ -15,15 +17,19 @@ p, li {
 	letter-spacing: 1px;
 }
 
+/* 画像の設定 */
+/* インライン要素だけどブロックの扱いにしている */
 img {
 	display: block;
 	margin: 0 auto;
 }
 
+/* 背景色の設定 */
 html {
 	background-color: black;
 }
 
+/* コンテンツを表示する領域の設定 */
 body {
 	width: 600;
 	margin:  0 auto;
