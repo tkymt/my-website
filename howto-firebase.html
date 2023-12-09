@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase 環境構築と使いかた</title>
+</head>
+
+<body>
+    <h1>Firebase 環境構築と使いかた</h1>
+    <h2>環境構築</h2>
+    <p>
+        アプリ <code>node version manager</code> をインストールする<br>
+        コマンド <code>nvm install lts</code> を実行する<br>
+        コマンド <code>nvm use lts</code> を実行する<br>
+    </p>
+    <p>
+        作業するディレクトリを作る<br>
+        <code>mkdir</code> または、<code>New-Item -ItemTypeDirectory</code> または、<code>ni -ItemType Directory</code>
+    </p>
+    <p>
+        コマンド <code>npm init -y</code> を実行する<br>
+        ファイル <code>package.json</code> を開いて適切な内容に書き換える
+    </p>
+
+    <p>
+        コマンド <code>npm i firebase</code> を実行する
+        ディレクトリ <code>src</code> を作る
+        ディレクトリ <code>src</code> に、ファイル <code>index.js</code> を作る
+    </p>
+
+    <p>
+        Firebaseのコンソールでアプリを追加する
+        そのとき提示されたコードを <code>index.js</code> に貼り付ける<br>
+    </p>
+    <p>
+        提示されたコードの例<br>
+        プロジェクトごとに違う部分をアスタリスクに置換している<br>
+    </p>
+    <code>
+<pre>// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "***************************************",
+  authDomain: "******************************",
+  databaseURL: "**************************************************",
+  projectId: "**************",
+  storageBucket: "**************************",
+  messagingSenderId: "************",
+  appId: "*****************************************"
+};
+
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);</pre>
+    </code>
+
+    下記のコードを加筆する
+    <code>
+<pre>import { getAuth, onAuthStateChanged } from 'firebase/auth';
+
+const auth = getAuth(app);
+onAuthStateChanged(auth, user => {
+    if(user != null) {
+        console.log('logged in!');
+    } else {
+        console.log('No user');
+    }
+});</pre>
+    </code>
+
+    <p>
+        ディレクトリ <code>src</code> に、ファイル <code>index.html</code> を作る<br>
+        <code>index.html</code> を開く<br>
+        <code>!</code> を入力して、TABキーを押し、HTMLのテンプレートを書く<br>
+
+        <code>&lt;/head&gt;</code> の上の行に、以下のコードを書く<br>
+        <code>&lt;script type="module" src="./index.js"&gt;&lt;/script&gt;</code>
+    </p>
+
+    <p>
+        コマンド <code>npm i -g serve</code> を実行する
+        コマンド serve ./src を実行する
+    </p>
+
+    <h2>モジュールバンドラーの使い方</h2>
+    <h3>・webpackの場合</h3>
+    <p>コマンド npm install -save-dev webpack webpack-cli または、 npm i -D webpack webpack-cli を実行する</p>
+
+    <p>コマンド .\node_modules\.bin\webpack を実行する</p>
+
+    <p>
+        ディレクトリ <code><code>dist</code></code> とその中にファイル <code>main.js</code> が作られる
+        <code>index.html</code> を <code>dist</code>に移動する
+        <code>index.html</code> のスクリプトタグのソースを <code>main.js</code> に書き換える
+    </p>
+
+    <p>
+        コマンド <code>serve .\dist</code> を実行する
+        <code>localhost:3000</code> にアクセスして動作を確認する
+    </p>
+
+    <h3>・esbuildの場合</h3>
+    <p>コマンド <code>npm i -D esbuild</code> を実行する</p>
+    <p>
+        ファイル <code>esbuild.config.mjs</code> を作る<br>
+        <code>esbuild.config.mjs</code> に、下記のコードを書く<br>
+        <code>
+<pre>import * as esbuild from 'esbuild';
+
+const result = await esbuild.build({
+    entryPoints: ['src/index.js'],
+    bundle: true,
+    outdir: 'dist',
+    minify: true,
+    sourcemap: 'linked',
+});
+console.log(result);</pre>
+        </code>
+
+        以上
+    </p>
+
+    <p>
+        ファイル <code>package.json</code> の オブジェクト <code>scripts</code> に以下のコードを加筆する<br>
+        <code>"build": "node ./esbuild.config.mjs"</code>
+    </p>
+    <h2>Firebase Hostingの使い方</h2>
+    <p>
+        コマンド <code>npm install -g firebase</code> を実行する<br>
+        コマンド <code>firebase login</code> を実行する<br>
+        コマンド <code>firebase init hosting</code> を実行する<br>
+        コマンド <code>firebase deploy</code> を実行する<br>
+    </p>
+
+    <h2>参照元</h2>
+    <p>
+        ・Node.jsとNode Version Managerについて<br>
+        <a href="https://nodejs.org/en/learn/getting-started/how-to-install-nodejs">How to install Node.js | Node.js</a> : https://nodejs.org/en/learn/getting-started/how-to-install-nodejs<br>
+        <a href="https://learn.microsoft.com/ja-jp/windows/dev-environment/javascript/nodejs-on-windows">NodeJS をネイティブ Windows 上に設定する | Microsoft Learn</a> : https://learn.microsoft.com/ja-jp/windows/dev-environment/javascript/nodejs-on-windows<br>
+        <a href="https://github.com/coreybutler/nvm-windows">coreybutler/nvm-windows: A node.js version management utility for Windows. Ironically written in Go.</a> : https://github.com/coreybutler/nvm-windows
+    </p>
+
+    <p>
+        ・Firebaseを使うにあたって必要な操作について<br>
+        <a href="https://firebase.google.com/docs/web/setup">Firebase を JavaScript プロジェクトに追加する</a> : https://firebase.google.com/docs/web/setup<br>
+        <a href="https://firebase.google.com/docs/web/module-bundling">Firebase でのモジュール バンドラの使用</a> : https://firebase.google.com/docs/web/module-bundling<br>
+        <a href="https://www.npmjs.com/package/serve">serve - npm</a> : https://www.npmjs.com/package/serve<br>
+    </p>
+
+    <p>
+        ・webpackについて<br>
+        <a href="https://webpack.js.org/guides/getting-started/">Getting Started | webpack</a> : https://webpack.js.org/guides/getting-started/<br>
+        <a href="https://www.npmjs.com/package/webpack">webpack - npm</a> : https://www.npmjs.com/package/webpack<br>
+        <a href="https://www.npmjs.com/package/webpack-cli">webpack-cli - npm</a> : https://www.npmjs.com/package/webpack-cli
+    </p>
+
+    <p>
+        ・esbuildについて<br>
+        <a href="https://esbuild.github.io/">esbuild - An extremely fast bundler for the web</a> : https://esbuild.github.io/<br>
+    </p>
+</body>
+
+</html>
