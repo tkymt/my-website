@@ -1,18 +1,24 @@
 /* フォントの設定 */
 html {
-	
-	font-size: 10px; /* px means "pxels": the base font size is now 10 pixels high */
-	font-family: 'M PULS 1 Code', sans-serif;
+	font-family: 'M PLUS 1', sans-serif;
+}
+
+code,
+code pre {
+	font-family: 'M PLUS 1 Code', monospace;
+}
+
+code pre {
+	color: white;
+	background-color: firebrick;
 }
 
 /* メインタイトルの設定 */
 h1 {
-	font-size: 60px;
 	text-align: center;
 }
 
 p, li {
-	font-size: 16px;
 	line-height: 2;
 	letter-spacing: 1px;
 }
