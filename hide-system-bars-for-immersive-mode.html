@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android システムバーを消して全画面表示にする方法 Kotlin</title>
+
+    <!-- GoogleFontsからフォントを取得する -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1&family=M+PLUS+1+Code&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+    <h1>Androidアプリ開発 Kotlinで全画面表示する方法</h1>
+    <p>以下のコードを任意のタイミングで呼び出せば全画面表示にできる</p>
+    <code>
+<pre>val insetsController = WindowCompat.getInsetsController(window, window.decorView)
+insetsController.hide(WindowInsetsCompat.Type.systemBars())
+insetsController.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE</pre>
+    </code>
+    <p>全文は下記の通り</p>
+    <code>MainActivity.kt</code>
+    <code>
+<pre>package com.example.hidesystembars
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        hideSystemBarsForImmersiveMode()
+    }
+
+    private fun hideSystemBarsForImmersiveMode() {
+        val insetsController = WindowCompat.getInsetsController(window, window.decorView)
+        insetsController.hide(WindowInsetsCompat.Type.systemBars())
+        insetsController.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+    }
+}</pre>
+    </code>
+    <p>
+        <a
+            href="https://developer.android.com/develop/ui/views/layout/immersive">この</a>公式ドキュメントのコードは、適切ではない。なぜなら<code>android.wiew</code>と<code>androidx.core.view</code>のコードが混在しているからだ。<br>
+        必ず、<code>Compat</code>が付いている<code>androdix.core.view</code>のクラスとメソッドを使うように。<br>
+        そうすることによって全てのAPIレベルで互換性が保たれる。もちろん特定のAPIレベルを対象にした下位互換性のないコードも書くことができる。また、廃止されたAPIもある。
+    </p>
+
+    公式ドキュメントのコードは間違っていたが、↓の部分は正しい。<br>
+    <a href="https://developer.android.com/develop/ui/views/layout/immersive#type">Specify which system bars to hide</a><br>
+    <a href="https://developer.android.com/develop/ui/views/layout/immersive#behavior">Specify behavior of hidden system bars</a>
+
+</body>
+
+</html>
