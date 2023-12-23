@@ -97,12 +97,13 @@ onAuthStateChanged(auth, user => {
 
     <h2>モジュールバンドラーの使い方</h2>
     <h3>・webpackの場合</h3>
-    <p>コマンド npm install -save-dev webpack webpack-cli または、 npm i -D webpack webpack-cli を実行する</p>
+    <p>コマンド <code>npm install -save-dev webpack webpack-cli</code> または、 <code>npm i -D webpack webpack-cli</code> を実行する
+    </p>
 
-    <p>コマンド .\node_modules\.bin\webpack を実行する</p>
+    <p>コマンド <code>.\node_modules\.bin\webpack</code> を実行する</p>
 
     <p>
-        ディレクトリ <code><code>dist</code></code> とその中にファイル <code>main.js</code> が作られる
+        ディレクトリ <code>dist</code> とその中にファイル <code>main.js</code> が作られる
         <code>index.html</code> を <code>dist</code>に移動する
         <code>index.html</code> のスクリプトタグのソースを <code>main.js</code> に書き換える
     </p>
@@ -117,7 +118,8 @@ onAuthStateChanged(auth, user => {
     <p>
         ファイル <code>esbuild.config.mjs</code> を作る<br>
         <code>esbuild.config.mjs</code> に、下記のコードを書く<br>
-        <code>
+    </p>
+    <code>
 <pre>import * as esbuild from 'esbuild';
 
 const result = await esbuild.build({
@@ -128,10 +130,7 @@ const result = await esbuild.build({
     sourcemap: 'linked',
 });
 console.log(result);</pre>
-        </code>
-
-        以上
-    </p>
+    </code>
 
     <p>
         ファイル <code>package.json</code> の オブジェクト <code>scripts</code> に以下のコードを加筆する<br>
