@@ -18,14 +18,14 @@
 <body class="m-plus-1-regular">
     <h1>Androidアプリ開発 Kotlinで全画面表示する方法</h1>
     <p>以下のコードを任意のタイミングで呼び出せば全画面表示にできる</p>
-    <code class="m-plus-1-code-regular">
+    <code>
 <pre>val insetsController = WindowCompat.getInsetsController(window, window.decorView)
 insetsController.hide(WindowInsetsCompat.Type.systemBars())
 insetsController.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE</pre>
     </code>
     <p>全文は下記の通り</p>
-    <code class="m-plus-1-code-regular">MainActivity.kt</code>
-    <code class="m-plus-1-code-regular">
+    <code>MainActivity.kt</code>
+    <code>
 <pre>package com.example.hidesystembars
 
 import androidx.appcompat.app.AppCompatActivity
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
 }</pre>
     </code>
     今回、上記のコードを書くにあたって読んだ<a href="https://developer.android.com/develop/ui/views/layout/immersive">公式ドキュメントのコード</a>はコピペしても動作しない。<br>
-    注意点は、<code class="m-plus-1-code-regular">Compat</code>が付いている<code class="m-plus-1-code-regular">androdix.core.view</code>のクラスとメソッドを使うように。<br>
+    注意点は、<code>Compat</code>が付いている<code>androdix.core.view</code>のクラスとメソッドを使うように。<br>
     そうすることで後方互換性が保たれる。<br>
 
     今回のコードのリポジトリ:<a href="https://github.com/tkymt/HideSystembars.git">https://github.com/tkymt/HideSystembars.git</a><br>
