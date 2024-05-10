@@ -22,34 +22,3 @@ code pre {
 	color: white;
 	background-color: firebrick;
 }
-
-/* メインタイトルの設定 */
-h1 {
-	text-align: center;
-}
-
-p, li {
-	line-height: 2;
-	letter-spacing: 1px;
-}
-
-/* 画像の設定 */
-/* インライン要素だけどブロックの扱いにしている */
-img {
-	display: block;
-	margin: 0 auto;
-}
-
-/* 背景色の設定 */
-html {
-	background-color: black;
-}
-
-/* コンテンツを表示する領域の設定 */
-body {
-	width: 600;
-	margin:  0 auto;
-	background-color: aliceblue;
-	padding: 0 20px 20px 20px;
-	border: 5px solid black;
-}
