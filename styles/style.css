@@ -1,11 +1,11 @@
 /* フォントの設定 */
-.m-plus-1-Reguler {
+.m-plus-1-reguler {
   font-family: "M PLUS 1", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
 }
-.m-plus-1-code-Reguler {
+.m-plus-1-code-reguler {
   font-family: "M PLUS 1 Code", monospace;
   font-optical-sizing: auto;
   font-weight: 400;
